@@ -35,7 +35,7 @@ import edu.zx.slidingmenu.SlidingMenu;
 
 /**
  * 主界面
- * Created by lenovo on 2016/9/27.
+ * Created by cc on 2016/9/27.
  */
 
 //ArrayAdapter
