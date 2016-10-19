@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:background="#A90101"
+    android:id="@+id/ll_base"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/iv_base_lift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        />
+    <TextView
+        android:id="@+id/tv_base_title"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:text="haha"
+        android:textColor="#ffffff"
+        />
+    <TextView
+        android:background="#ffffff"
+        android:id="@+id/tv_base_right_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        />
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/iv_base_right_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        />
+</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+</LinearLayout>

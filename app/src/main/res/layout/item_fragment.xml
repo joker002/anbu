@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+<ImageView
+    android:id="@+id/iv_item_fragment"
+    android:layout_gravity="center"
+    android:src="@mipmap/ic_launcher"
+    android:layout_width="100dp"
+    android:layout_height="90dp" />
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_iten_fragment_title"
+            android:gravity="center"
+            android:text="TITLE"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/tv_iten_fragment_summary"
+            android:gravity="center"
+            android:text="SUMMARY"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/tv_iten_fragment_stamp"
+            android:gravity="center"
+            android:text="STAMP"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+    </LinearLayout>
+</LinearLayout>
