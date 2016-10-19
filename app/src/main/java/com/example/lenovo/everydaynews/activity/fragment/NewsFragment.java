@@ -108,7 +108,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void success(Response response) {
-                //Log.e("aaa", "success: "+response.result );
+                Log.e("aaa", "success: "+response.result );
                 //Gson解析
                 Gson gson = new Gson();
                 NewsArray array = gson.fromJson(response.result.toString(), NewsArray.class);

@@ -45,6 +45,10 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     int dir = 1;
     int nid = 1;
     /**
+     * 评论内容
+     */
+    String str;
+    /**
      * 格式化日期类
      */
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -86,36 +90,12 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        String str = mEditText.getText().toString();
-
-        Map<String, String> params = new HashMap<>();
-        params.put("ver", "0000000");
-        //当前新闻ID
-        params.put("nid", "20");
-        //用户令牌 dc1e619835848e06ca49e009f25d560e
-        //dc1e619835848e06ca49e009f25d560e
-        params.put("token", "dc1e619835848e06ca49e009f25d560e");
-        //手机标识符
-        params.put("imei", "866818023239831");
-        //评论内容
-        params.put("ctx", "" + str);
-
-        Log.e("aaa", "onClick: " + str);
-
-        MyHttp.get(this, "http://118.244.212.82:9092/newsClient/cmt_commit", params, new OnResultFinishListener() {
-            @Override
-            public void success(Response response) {
-                Log.e("aaa", "success: " + response.result);
-                Toast.makeText(CommentActivity.this, "成功", Toast.LENGTH_LONG).show();
-
-            }
-
-            @Override
-            public void failed(Response response) {
-                Log.e("aaa", "failed: " + response.result);
-                Toast.makeText(CommentActivity.this, "失败", Toast.LENGTH_LONG).show();
-            }
-        });
+        str = mEditText.getText().toString();
+        getCommentHttp();
+        mEditText.setText("");
+        //需要清空之前
+        mAdapter.mList.clear();
+        getHttp();
     }
 
     //下拉刷新
@@ -141,6 +121,9 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         getHttp();
     }
 
+    /**
+     * 调用所有跟帖接口
+     */
     public void getHttp() {
         Map<String, String> params = new HashMap();
         params.put("ver", "0000000");
@@ -166,7 +149,6 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
                 Log.e("aaa", "success: " + response.result + "+++++++" + aa.data + aa.message + aa.status);
 
-
                 if (aa.data != null && aa.data.size() > 0) {
                     mAdapter.mList.addAll(aa.data);
                     mAdapter.notifyDataSetChanged();
@@ -180,15 +162,50 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 mXListView.stopRefresh();
                 mXListView.stopLoadMore();
 
-                Toast.makeText(CommentActivity.this, "成功全部", Toast.LENGTH_LONG).show();
+                //Toast.makeText(CommentActivity.this, "成功全部", Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void failed(Response response) {
-                Toast.makeText(CommentActivity.this, "失败", Toast.LENGTH_LONG).show();
+                //Toast.makeText(CommentActivity.this, "失败", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    /**
+     * 评论接口
+     */
+    public  void getCommentHttp(){
+        Map<String, String> params = new HashMap<>();
+        params.put("ver", "0000000");
+        //当前新闻ID
+        params.put("nid", "20");
+        //用户令牌 dc1e619835848e06ca49e009f25d560e
+        params.put("token", "dc1e619835848e06ca49e009f25d560e");
+        //手机标识符
+        params.put("imei", "866818023239831");
+        //评论内容
+        params.put("ctx", "" + str);
+
+        Log.e("aaa", "onClick: " +params);
+        if (str!=null&&str.length()!=0) {
+            MyHttp.get(this, "http://118.244.212.82:9092/newsClient/cmt_commit", params, new OnResultFinishListener() {
+                @Override
+                public void success(Response response) {
+                    Log.e("aaa", "success: " + response.result);
+                    Toast.makeText(CommentActivity.this, "成功", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void failed(Response response) {
+                    Log.e("aaa", "failed: " + response.result);
+                    Toast.makeText(CommentActivity.this, "失败", Toast.LENGTH_LONG).show();
+                }
+            });
+        }else{
+            Toast.makeText(this,"请输入内容",Toast.LENGTH_LONG).show();
+        }
     }
 }
 
