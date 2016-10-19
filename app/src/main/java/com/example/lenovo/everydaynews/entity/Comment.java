@@ -8,7 +8,7 @@ public class Comment {
     /**
      * 评论编号
      */
-    public String cid;
+    public int cid;
     /**
      * 评论者姓名
      */

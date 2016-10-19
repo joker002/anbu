@@ -65,7 +65,7 @@ public class DisembarkActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void success(Response response) {
                             Toast.makeText(DisembarkActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
-
+                            Log.e("aaa", "success: "+response.result );
                         }
 
                         @Override
