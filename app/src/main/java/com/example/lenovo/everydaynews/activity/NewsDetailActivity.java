@@ -92,6 +92,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
 
         mView.setOnClickListener(this);
+        mIvLift.setOnClickListener(this);
     }
 
     //监听按键
@@ -132,7 +133,6 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 mPopupWindow.dismiss();
                 Toast.makeText(this, "已加入收藏", Toast.LENGTH_LONG).show();
                 break;
-
         }
     }
 }

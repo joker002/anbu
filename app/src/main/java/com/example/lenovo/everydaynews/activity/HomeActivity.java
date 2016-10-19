@@ -136,6 +136,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         mListLift.setOnItemClickListener(this);
 
         mIvLift.setOnClickListener(this);
+
         mIvRightTwo.setOnClickListener(this);
         mTextView.setOnClickListener(this);
         mIvHead.setOnClickListener(this);
