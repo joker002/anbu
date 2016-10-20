@@ -30,6 +30,8 @@ import com.example.lenovo.everydaynews.entity.News;
 
 import java.util.ArrayList;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import edu.zx.slidingmenu.SlidingMenu;
 
 
@@ -42,6 +44,8 @@ import edu.zx.slidingmenu.SlidingMenu;
 //android.support.v4.widget.DrawerLayout
 //记得提交
 public class HomeActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+    ImageView mImageView;
+
     //左侧布局
     ListView mListLift;
     //每一个事务都是同时要执行的一套变化.可以在一个给定的事务中设置你想执行的所有变化,使用诸如 add(), remove(), 和 replace().然后, 要给activity应用事务, 必须调用 commit().
@@ -102,15 +106,23 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         //将SlidingMenu与当前Activity进行绑定 并设置模式
         mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
         LayoutInflater inflater = getLayoutInflater();
-        View listLift = inflater.inflate(R.layout.item_home_left, null);
 
+        View listLift = inflater.inflate(R.layout.item_home_left, null);
         mListLift = (ListView) listLift.findViewById(R.id.lv_home_left);
+
         //设置左侧菜单setMenu(View view)   setMenu(int layoutId)
         mSlidingMenu.setMenu(listLift);
 
 
         //设置右侧菜单 setSecondaryMenu(View view)   setSecondaryMenu(int  layoutId)
+
+        //View listRight = inflater.inflate(R.layout.item_home_right, null);
         mSlidingMenu.setSecondaryMenu(R.layout.item_home_right);
+
+
+
+
+
         //设置展示模式
         //是否支持左右两侧 或者只是一侧  setMode(int model)
         //SlidingMenu.LEFT_RIGHT------->左右两侧
@@ -129,6 +141,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
         TextView mTextView = (TextView) findViewById(R.id.tv_home_disembark);
         ImageView mIvHead = (ImageView) findViewById(R.id.iv_home_head);
+        mImageView = (ImageView)findViewById(R.id.iv_home_weixin);
+        mImageView.setOnClickListener(this);
+
 
         String[] strings = {"新闻", "收藏", "本地", "跟帖", "图片",};
         mListLift.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, strings));
@@ -141,6 +156,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         mTextView.setOnClickListener(this);
         mIvHead.setOnClickListener(this);
 
+        //初始化ShareSDK
+        ShareSDK.initSDK(this, "181ee874ccb3a");
     }
 
     @Override
@@ -160,6 +177,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 break;
             case R.id.iv_base_right_two:
                 mSlidingMenu.showSecondaryMenu();
+                break;
+            case R.id.iv_home_weixin:
+                showShare();
                 break;
         }
     }
@@ -244,5 +264,35 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
             return;
         }
         super.onBackPressed();
+    }
+
+    /**
+     * 分享
+     */
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
+        oks.setTitle("标题");
+        // titleUrl是标题的网络链接，QQ和QQ空间等使用
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://sharesdk.cn");
+
+        // 启动分享GUI
+        oks.show(this);
     }
 }
