@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.lenovo.everydaynews.R;
 import com.example.lenovo.everydaynews.entity.Comment;
 
@@ -26,6 +27,8 @@ public class CommentAdapter extends MyBaseAdapter<Comment> {
         Comment com = mList.get(position);
         //评论者头像
         ImageView cid = (ImageView) convertView.findViewById(R.id.iv_comment_portrait);
+        Glide.with(mContext).load(com.portrait).into(cid);
+
         //cid.setImageResource();
         //评论者姓名
         TextView name = (TextView) convertView.findViewById(R.id.tv_comment_name);

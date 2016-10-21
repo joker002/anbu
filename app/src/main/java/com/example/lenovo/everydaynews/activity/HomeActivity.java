@@ -1,6 +1,7 @@
 package com.example.lenovo.everydaynews.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
@@ -27,8 +28,15 @@ import com.example.lenovo.everydaynews.activity.fragment.LocationFragment;
 import com.example.lenovo.everydaynews.activity.fragment.NewsFragment;
 import com.example.lenovo.everydaynews.adapter.NewsFragmentAdapter;
 import com.example.lenovo.everydaynews.entity.News;
+import com.example.lenovo.everydaynews.net.MyHttp;
+import com.example.lenovo.everydaynews.net.OnResultFinishListener;
+import com.example.lenovo.everydaynews.net.Response;
+import com.google.gson.Gson;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -120,9 +128,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         mSlidingMenu.setSecondaryMenu(R.layout.item_home_right);
 
 
-
-
-
         //设置展示模式
         //是否支持左右两侧 或者只是一侧  setMode(int model)
         //SlidingMenu.LEFT_RIGHT------->左右两侧
@@ -141,7 +146,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
         TextView mTextView = (TextView) findViewById(R.id.tv_home_disembark);
         ImageView mIvHead = (ImageView) findViewById(R.id.iv_home_head);
-        mImageView = (ImageView)findViewById(R.id.iv_home_weixin);
+        TextView mTvUpdate = (TextView) findViewById(R.id.tv_home_right_update);
+
+        mImageView = (ImageView) findViewById(R.id.iv_home_weixin);
         mImageView.setOnClickListener(this);
 
 
@@ -155,7 +162,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         mIvRightTwo.setOnClickListener(this);
         mTextView.setOnClickListener(this);
         mIvHead.setOnClickListener(this);
-
+        mTvUpdate.setOnClickListener(this);
         //初始化ShareSDK
         ShareSDK.initSDK(this, "181ee874ccb3a");
     }
@@ -180,6 +187,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 break;
             case R.id.iv_home_weixin:
                 showShare();
+                break;
+            case R.id.tv_home_right_update:
+                getUpdate();
                 break;
         }
     }
@@ -295,4 +305,39 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         // 启动分享GUI
         oks.show(this);
     }
+
+    public void getUpdate() {
+
+
+        //PackageInfo 拿到版本号
+        //update?imei=唯一识别号&pkg=包名&ver=版本
+        Map<String, String> params = new HashMap<>();
+        params.put("imei", "866818023239831");
+        params.put("pkg", "com.example.lenovo.everydaynews");
+        params.put("ver", "0000000");
+        MyHttp.get(this, "http://118.244.212.82:9092/newsClient/update", params, new OnResultFinishListener() {
+            @Override
+            public void success(Response response) {
+                Log.e("aaa", "success: " + response.result);
+                Gson gson=new Gson();
+                Update update=gson.fromJson(response.result.toString(),Update.class);
+                Log.e("aaa", "success: "+update.link );
+                if(!update.link.equals("1")){
+
+                }
+            }
+
+            @Override
+            public void failed(Response response) {
+                Log.e("aaa", "failed: " + response.result);
+            }
+        });
+    }
+}
+
+class Update {
+    public String pkgName;//包名,
+    public String version;//版本号,
+    public URL link;//下载地址,
+    public String md5;//MD5检验值
 }

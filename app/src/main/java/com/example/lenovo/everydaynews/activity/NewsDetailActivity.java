@@ -56,7 +56,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         //对象bean= (对象bean) getIntent().getSerializableExtra("设置标记的key");
         mNews = (News) getIntent().getSerializableExtra("Extra");
         //String str = intent.getStringExtra("Extra");
-        Log.e("aaa", "initView: " + mNews.link);
+        //Log.e("aaa", "initView: " + mNews.link);
         String str = mNews.link;
 
         //1.加载连接
