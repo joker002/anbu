@@ -34,6 +34,11 @@ public class DisembarkActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView() {
+
+        mIvLift.setImageResource(R.mipmap.ic_title_home_default);
+        mTvTitle.setText("用户登录");
+        mIvRightTwo.setImageResource(R.mipmap.ic_title_share_default);
+
         //Log.e("aaa", "initView: 1111111111111");
         mTextInputName = (TextInputLayout) findViewById(R.id.text_layout_name);
         mTextInoutPassword = (TextInputLayout) findViewById(R.id.text_layout_password);
@@ -65,7 +70,7 @@ public class DisembarkActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void success(Response response) {
                             Toast.makeText(DisembarkActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
-                            Log.e("aaa", "success: "+response.result );
+                            //Log.e("aaa", "success: "+response.result );
                         }
 
                         @Override

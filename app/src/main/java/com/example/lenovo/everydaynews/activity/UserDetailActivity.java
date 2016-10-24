@@ -35,9 +35,6 @@ import com.example.lenovo.everydaynews.R;
 import com.example.lenovo.everydaynews.net.MyHttp;
 import com.example.lenovo.everydaynews.net.OnResultFinishListener;
 import com.example.lenovo.everydaynews.net.Response;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.unionpay.UPPayAssistEx;
 
 import org.json.JSONException;

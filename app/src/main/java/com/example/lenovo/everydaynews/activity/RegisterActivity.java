@@ -41,6 +41,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+
+
+        mIvLift.setImageResource(R.mipmap.ic_title_home_default);
+        mTvTitle.setText("用户注册");
+        mIvRightTwo.setImageResource(R.mipmap.ic_title_share_default);
+
         emile = (EditText) findViewById(R.id.et_reg_emile);
         name = (EditText) findViewById(R.id.et_reg_name);
         password = (EditText) findViewById(R.id.et_reg_password);

@@ -210,12 +210,9 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="9f6f7e4b4e8f05ba7504eb63" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <!--极光推送结束-->
+            android:value="9f6f7e4b4e8f05ba7504eb63" />
+
+
 
         <!--手机银联支付-->
         <uses-library

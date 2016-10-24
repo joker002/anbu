@@ -87,7 +87,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         mTvTitle.setText("资讯");
         mIvRightTwo.setImageResource(R.mipmap.ic_title_share_default);
 
-
         //mDrawerLayout = (DrawerLayout) findViewById(R.id.hhhh);
 
         //拿到碎片管理类对象
