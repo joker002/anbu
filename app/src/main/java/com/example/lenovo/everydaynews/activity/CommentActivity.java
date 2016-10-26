@@ -1,17 +1,14 @@
 package com.example.lenovo.everydaynews.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lenovo.everydaynews.R;
 import com.example.lenovo.everydaynews.adapter.CommentAdapter;
 import com.example.lenovo.everydaynews.entity.Comment;
-import com.example.lenovo.everydaynews.entity.News;
 import com.example.lenovo.everydaynews.net.MyHttp;
 import com.example.lenovo.everydaynews.net.OnResultFinishListener;
 import com.example.lenovo.everydaynews.net.Response;
@@ -213,7 +210,6 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 class Return {
     public String message;
     public String status;
-
     public ArrayList<Comment> data;
 }
 
